@@ -22,7 +22,7 @@ namespace BlockBreaker.Scripts
         public void BlockDestroy()
         {
             _breakableBlocks--;
-            if (_session.IsAutoPlay()) return;
+            if (_session != null && _session.IsAutoPlay()) return;
 
             if (_breakableBlocks <= 0)
                 _sceneLoader.LoadNextScene();

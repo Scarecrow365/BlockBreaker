@@ -3,26 +3,50 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    [SerializeField] private GameObject[] blocks;
-    [SerializeField] private Vector2 maxVector;
-    [SerializeField] private Vector2 minVector;
-    [SerializeField] private Transform spawnBlocks;
-    [SerializeField] private List<Vector2> vector2;
+    [SerializeField] private GameObject[] _blocks;
+    [SerializeField] private int _spawnCountBlocks;
+    [SerializeField] private float _offsetSideBorders;
+    [SerializeField] private Transform _spawnPlaceForBlocks;
+    private readonly List<Vector2> _spawnPositions = new List<Vector2>();
+    private Vector2 _startSpawnPos;
+    private Vector2 _endSpawnPos;
+
+    private void Awake()
+    {
+        _startSpawnPos = new Vector2(-NewPosX / 2 + _offsetSideBorders , 11);
+        _endSpawnPos = new Vector2(NewPosX / 2 - _offsetSideBorders, _endSpawnPos.y);
+    }
 
     private void Start()
     {
-        vector2.Add(new Vector2(minVector.x, minVector.y));
+        StartCreateBlocks();
+    }
 
-        for (var i = 0; i < 329; i++) //329 blocks for 5 rows (1 row = 48 blocks)
-            vector2.Add(vector2[i].x == maxVector.x
-                ? new Vector2(minVector.x, vector2[i].y - 0.5f)
-                : new Vector2(vector2[i].x + 0.5f, vector2[i].y));
+    private void StartCreateBlocks()
+    {
+        _spawnPositions.Add(new Vector2(_startSpawnPos.x, _startSpawnPos.y));
 
-        foreach (var t in vector2)
+        for (var i = 0; i < _spawnCountBlocks; i++)
         {
-            var goIndex = Random.Range(0, blocks.Length);
-            var go = Instantiate(blocks[goIndex], t, Quaternion.identity);
-            go.transform.SetParent(spawnBlocks);
+            if (_spawnPositions[i].x >= _endSpawnPos.x)
+            {
+                _spawnPositions.Add(new Vector2(_startSpawnPos.x, _spawnPositions[i].y - 0.5f));
+                CreateBlock(_spawnPositions[i]);
+            }
+            else
+            {
+                _spawnPositions.Add(new Vector2(_spawnPositions[i].x + 0.5f, _spawnPositions[i].y));
+                CreateBlock(_spawnPositions[i]);
+            }
         }
     }
+
+    private void CreateBlock(Vector2 position)
+    {
+        int index = Random.Range(0, _blocks.Length);
+        GameObject go = Instantiate(_blocks[index], position, Quaternion.identity);
+        go.transform.SetParent(_spawnPlaceForBlocks);
+    }
+
+    private float NewPosX => 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - 0.5f);
 }

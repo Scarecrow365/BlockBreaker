@@ -5,16 +5,15 @@ namespace BlockBreaker.Scripts
 {
     public class GameSession : MonoBehaviour
     {
-        [SerializeField] private int currentScore;
-
         [Range(0.5f, 1.5f)] [SerializeField] private float gameSpeed = 1f;
         [SerializeField] private bool isAutoPlay;
         [SerializeField] private int scorePerBlockDestroy = 1;
         [SerializeField] private TextMeshProUGUI scoreText;
+        private int currentScore;
 
         private void Awake()
         {
-            var gameStatusCount = FindObjectsOfType<GameSession>().Length;
+            int gameStatusCount = FindObjectsOfType<GameSession>().Length;
 
             if (gameStatusCount > 1)
             {

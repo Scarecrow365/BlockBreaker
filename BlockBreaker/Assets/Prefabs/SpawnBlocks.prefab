@@ -43,13 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ba2021785155a48a625b66b6c72319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocks:
+  _blocks:
   - {fileID: 3822570505611416472, guid: c8d7c13aebee0c44dbf091ad84b7a42e, type: 3}
   - {fileID: 3822570505611416472, guid: e21b9fd477ccd324290b0ab8930e3719, type: 3}
   - {fileID: 3822570505611416472, guid: 6f10614eb2eb37a4d949c728cea601f7, type: 3}
   - {fileID: 3822570505611416472, guid: d2afcc1418664ae4da4c6f91bfa597c7, type: 3}
   - {fileID: 3822570505611416472, guid: 445c1944acd5bac40b7549e61915c5fa, type: 3}
-  maxVector: {x: 23.75, y: 8.75}
-  minVector: {x: 0.25, y: 11.25}
-  spawnBlocks: {fileID: 0}
-  vector2: []
+  _spawnCountBlocks: 80
+  _offsetSideBorders: 2
+  _spawnPlaceForBlocks: {fileID: 0}

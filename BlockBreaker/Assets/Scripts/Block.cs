@@ -11,7 +11,6 @@ namespace BlockBreaker.Scripts
         [SerializeField] private Sprite[] hitSprites;
         [SerializeField] private GameObject sparkEffect;
 
-
         private void Start()
         {
             CountBreakableBlocks();
@@ -34,7 +33,7 @@ namespace BlockBreaker.Scripts
         private void HandleHit()
         {
             _timesHit++;
-            var maxHits = hitSprites.Length + 1;
+            int maxHits = hitSprites.Length + 1;
             if (_timesHit >= maxHits)
                 DestroyBlock();
             else
@@ -43,7 +42,7 @@ namespace BlockBreaker.Scripts
 
         private void ShowNextHitSprite()
         {
-            var spriteIndex = _timesHit - 1;
+            int spriteIndex = _timesHit - 1;
             if (hitSprites[spriteIndex] != null)
                 GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
             else
@@ -61,12 +60,12 @@ namespace BlockBreaker.Scripts
         private void PlayBlockDestroySFX()
         {
             AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position);
-            FindObjectOfType<GameSession>().AddToScore();
+            FindObjectOfType<GameSession>()?.AddToScore();
         }
 
         private void TriggerSparksEffect()
         {
-            var sparkles = Instantiate(sparkEffect, transform.position, transform.rotation);
+            GameObject sparkles = Instantiate(sparkEffect, transform.position, transform.rotation);
             Destroy(sparkles, 1f);
         }
     }

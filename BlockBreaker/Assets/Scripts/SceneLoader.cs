@@ -8,14 +8,14 @@ namespace BlockBreaker.Scripts
         public void LoadMainScene()
         {
             SceneManager.LoadScene(0);
-            var p = FindObjectOfType<GameSession>();
-            if (p != null)
-                p.ResetGame();
+            GameSession gameSession = FindObjectOfType<GameSession>();
+            if (gameSession != null)
+                gameSession.ResetGame();
         }
 
         public void LoadNextScene()
         {
-            var currentScene = SceneManager.GetActiveScene().buildIndex;
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentScene + 1);
         }
 

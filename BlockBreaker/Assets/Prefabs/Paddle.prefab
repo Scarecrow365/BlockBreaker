@@ -58,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -93,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa66f72a7798274e9a2702531881695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 7
+  _offsetFromBorders: 0.8
 --- !u!60 &2646257043870385854
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ namespace BlockBreaker.Scripts
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!_gameSession.IsAutoPlay())
+            if (_gameSession == null || !_gameSession.IsAutoPlay())
                 SceneManager.LoadScene("GameOver");
         }
     }
